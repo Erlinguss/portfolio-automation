@@ -46,7 +46,7 @@ namespace PortfolioAutomation.Abstractions
 
         public async Task Execute()
         {
-            var page = Repository.Get<IPage>();
+            var page = Repository.Get<Microsoft.Playwright.IPage>();
 
             await PerformExecute();
 

@@ -1,8 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 using NUnit.Framework;
+using PortfolioAutomation.Abstractions;
+using PortfolioAutomation.Models;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace PortfolioAutomationTest.TestBase
 {
@@ -11,9 +14,8 @@ namespace PortfolioAutomationTest.TestBase
         protected IPage Page;
         protected IBrowser Browser;
         protected IRepository Repository;
-        protected string EngineerEmail;
-        protected string EngineerToken;
         protected string BaseUrl;
+        protected PortfolioData PortfolioData;
 
         [SetUp]
         public async Task Setup()
@@ -26,7 +28,13 @@ namespace PortfolioAutomationTest.TestBase
 
             BaseUrl = configuration["BaseUrl"] ?? throw new Exception("BaseUrl is not configured.");
 
-            Console.WriteLine($"BaseUrl: {BaseUrl}");
+            // Build strongly-typed model
+            PortfolioData = new PortfolioData
+            {
+                BaseUrl = BaseUrl
+            };
+
+            Console.WriteLine(PortfolioData.ToString());
 
             // Setup Playwright and Browser
             var playwright = await Playwright.CreateAsync();
@@ -42,9 +50,10 @@ namespace PortfolioAutomationTest.TestBase
 
             Page = await context.NewPageAsync();
 
-            // Initialize Repository 
+            // Initialize Repository and register Page + PortfolioData
             Repository = new MemoryRepository();
             Repository.Add(Page);
+            Repository.Add(PortfolioData);
         }
 
         [TearDown]
