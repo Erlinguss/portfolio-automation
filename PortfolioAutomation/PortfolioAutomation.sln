@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioAutomation", "PortfolioAutomation.csproj", "{A03C21DA-E4D9-4A44-B624-EC47AC0FC476}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioAutomationTest", "..\PortfolioAutomationTest\PortfolioAutomationTest.csproj", "{B5ABA2EE-CE20-46C1-B088-75F8F963BE19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A03C21DA-E4D9-4A44-B624-EC47AC0FC476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03C21DA-E4D9-4A44-B624-EC47AC0FC476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03C21DA-E4D9-4A44-B624-EC47AC0FC476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03C21DA-E4D9-4A44-B624-EC47AC0FC476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5ABA2EE-CE20-46C1-B088-75F8F963BE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5ABA2EE-CE20-46C1-B088-75F8F963BE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5ABA2EE-CE20-46C1-B088-75F8F963BE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5ABA2EE-CE20-46C1-B088-75F8F963BE19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {562A19B5-FB44-4C39-A3CA-7B5C08A22BE8}
+	EndGlobalSection
+EndGlobal

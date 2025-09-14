@@ -1,0 +1,25 @@
+# Build artifacts
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# VS stuff
+.vs/
+*.user
+*.suo
+
+# Resharper / Rider
+.idea/
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Playwright
+.playwright/
+
+# Sensitive configs
+appsettings.json
+appsettings.*.json
