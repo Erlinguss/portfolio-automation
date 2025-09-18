@@ -17,8 +17,8 @@ namespace PortfolioAutomation.Steps.Navigation
             Console.WriteLine("Testing Projects navigation...");
 
             await page.ClickAsync("text=Projects");
-          //  await page.WaitForTimeoutAsync(1000);
-          await page.WaitForLoadStateAsync();
+            await page.WaitForTimeoutAsync(1000);
+         
 
             var currentUrl = page.Url;
             if (!currentUrl.Contains("/projects"))
