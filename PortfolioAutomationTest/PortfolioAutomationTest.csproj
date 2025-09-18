@@ -23,9 +23,11 @@
     <PackageReference Include="Microsoft.Playwright" Version="1.55.0" />
     <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.55.0" />
     <PackageReference Include="Microsoft.Playwright.TestAdapter" Version="1.55.0" />
+    <PackageReference Include="NuGet.Protocol" Version="6.14.0" />
     <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="5.1.0" />
-  </ItemGroup>
+	
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PortfolioAutomation\PortfolioAutomation.csproj" />

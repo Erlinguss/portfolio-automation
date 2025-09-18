@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using PortfolioAutomation.Abstractions;
-using PortfolioAutomationTest.TestBase;
+using PortfolioAutomationTest;
 using PortfolioAutomation.Steps;
 using PortfolioAutomation.Steps.Dashboard;
 
@@ -15,8 +15,6 @@ namespace PortfolioAutomation.DashboardTest
             try
             {
                 Console.WriteLine("Starting Dashboard Responsiveness Test...");
-
-             
 
                 // Initialize the flow 
                 IStep flow = new CheckDashboardResponsiveness(Repository);

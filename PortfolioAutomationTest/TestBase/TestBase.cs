@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace PortfolioAutomationTest.TestBase
+namespace PortfolioAutomationTest
 {
     public class TestBase
     {
@@ -49,6 +49,7 @@ namespace PortfolioAutomationTest.TestBase
             });
 
             Page = await context.NewPageAsync();
+            await Page.GotoAsync(BaseUrl);
 
             // Initialize Repository and register Page + PortfolioData
             Repository = new MemoryRepository();
