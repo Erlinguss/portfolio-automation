@@ -15,8 +15,8 @@ namespace PortfolioAutomationTest.DownloadCVTest
             {
                 Console.WriteLine("Starting Download CV Test...");
 
-                IStep flow = new CheckDownloadCV(Repository,
-                             new DownloadCVAssertion(Repository));
+                IStep flow = new CheckDownloadCV(Repository);
+                      flow.Chain(new DownloadCVAssertion(Repository));
 
                 await flow.Execute();
 
