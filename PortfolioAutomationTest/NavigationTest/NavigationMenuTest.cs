@@ -3,10 +3,6 @@ using NUnit.Framework;
 using PortfolioAutomation.Abstractions;
 using PortfolioAutomation.Steps.Navigation;
 using PortfolioAutomationTest;
-
-using NUnit.Framework;
-using PortfolioAutomation.Abstractions;
-using PortfolioAutomationTest;
 using PortfolioAutomationTest.Assertions;
 
 namespace PortfolioAutomationTest.NavigationTest
