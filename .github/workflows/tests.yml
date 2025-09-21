@@ -24,17 +24,17 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Install dependencies
-        run: dotnet restore ./PortfolioAutomationTest/PortfolioAutomationTest.csproj
+      - name: Restore dependencies
+        run: dotnet restore ./PortfolioAutomation.sln
 
       - name: Build solution
-        run: dotnet build --configuration Release
+        run: dotnet build ./PortfolioAutomation.sln --configuration Release --no-restore
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: dotnet test --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test ./PortfolioAutomationTest/PortfolioAutomationTest.csproj --logger "trx;LogFileName=test-results.trx"
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
 
