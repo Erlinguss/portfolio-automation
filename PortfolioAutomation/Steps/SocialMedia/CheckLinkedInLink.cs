@@ -17,7 +17,6 @@ namespace PortfolioAutomation.Steps.Social
 
             // Use the first LinkedIn link (header)
             var linkedInHeader = page.Locator("a[aria-label='Open LinkedIn profile']").First;
-
             await linkedInHeader.ClickAsync();
 
             // Ensure navigation is complete
