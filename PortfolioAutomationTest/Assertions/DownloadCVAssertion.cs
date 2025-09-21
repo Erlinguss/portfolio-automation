@@ -1,6 +1,7 @@
 ﻿using PortfolioAutomation.Abstractions;
 using Microsoft.Playwright;
-using static Microsoft.Playwright.Assertions;
+using System;
+using System.Threading.Tasks;
 
 namespace PortfolioAutomationTest.Assertions
 {
@@ -11,22 +12,22 @@ namespace PortfolioAutomationTest.Assertions
 
         protected override async Task PerformExecute()
         {
+            var page = Repository.Get<IPage>();
+
             Console.WriteLine("Asserting Download CV link...");
 
-            var page = Repository.Get<IPage>();
-            await page.WaitForLoadStateAsync();
+            // Locate the Download CV link
+            var downloadLink = page.Locator("a:has-text('Download CV')").First;
 
-            // Wait for navigation
-            await page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+            // Get its href attribute
+            var href = await downloadLink.GetAttributeAsync("href");
 
-            // Assert PDF URL
-            var url = page.Url;
-            if (!url.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(href) || !href.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
             {
-                throw new Exception($"CV link did not open a PDF. Found URL: {url}");
+                throw new Exception($"Expected Download CV link to point to a PDF, but got: {href}");
             }
 
-            Console.WriteLine($"CV link opened successfully and points to PDF: {url}");
+            Console.WriteLine($"Download CV link correctly points to a PDF: {href}");
         }
     }
 }

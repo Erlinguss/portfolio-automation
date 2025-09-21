@@ -46,7 +46,7 @@ namespace PortfolioAutomationTest
             var playwright = await Playwright.CreateAsync();
             Browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = true 
+                Headless = true
             });
 
             var context = await Browser.NewContextAsync(new BrowserNewContextOptions
