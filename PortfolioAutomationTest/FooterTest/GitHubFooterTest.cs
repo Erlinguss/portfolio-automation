@@ -5,7 +5,7 @@ using PortfolioAutomation.Steps.SocialMedia;
 using System;
 using System.Threading.Tasks;
 
-namespace PortfolioAutomationTest.SocialTest
+namespace PortfolioAutomationTest.FooterTest
 {
     [TestFixture]
     public class GitHubFooterTest : TestBase
