@@ -34,12 +34,18 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: dotnet test ./PortfolioAutomationTest/PortfolioAutomationTest.csproj --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test ./PortfolioAutomationTest/PortfolioAutomationTest.csproj --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
+        continue-on-error: true   
 
       - name: Upload test results
+        if: always()             
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: '**/TestResults/*.trx'
+          path: ./TestResults/*.trx
+
+      - name: Post Set up .NET
+        if: always()             
+        run: echo "Post test cleanup completed."

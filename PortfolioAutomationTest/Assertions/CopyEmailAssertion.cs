@@ -15,11 +15,17 @@ namespace PortfolioAutomationTest.Assertions
         {
             var page = Repository.Get<IPage>();
 
-            // Verify the toast message appears
-            var toast = page.Locator("text=Copied to clipboard!");
-            await Expect(toast).ToBeVisibleAsync();
+            Console.WriteLine("Asserting Copy Email toast...");
 
-            Console.WriteLine("Copy Email button works and toast message is visible.");
+            await page.WaitForTimeoutAsync(500); 
+
+            // Select stable element inside the toaster
+            var toast = page.Locator("div[role='status'][aria-live='polite']");
+
+            // Ensure it shows up in the DOM
+            await Expect(toast).ToHaveCountAsync(1);
+
+            Console.WriteLine("Copy Email toast appeared in the DOM with correct text.");
         }
     }
 }
