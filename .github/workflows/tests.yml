@@ -7,9 +7,9 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: # allows manual runs
+  workflow_dispatch:
   schedule:
-    - cron: "0 17 * * *"  # run every day at 17:00 UTC
+    - cron: "0 17 * * *"
 
 jobs:
   test:
@@ -25,10 +25,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore ./PortfolioAutomation.sln
+        run: dotnet restore ./PortfolioAutomation/PortfolioAutomation.sln
 
       - name: Build solution
-        run: dotnet build ./PortfolioAutomation.sln --configuration Release --no-restore
+        run: dotnet build ./PortfolioAutomation/PortfolioAutomation.sln --configuration Release --no-restore
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
