@@ -20,13 +20,19 @@ namespace PortfolioAutomationTest
         [SetUp]
         public async Task Setup()
         {
-            // Load configuration from appsettings.json
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+            // 1. First check environment variable (for GitHub Actions)
+            BaseUrl = Environment.GetEnvironmentVariable("BASE_URL");
 
-            BaseUrl = configuration["BaseUrl"] ?? throw new Exception("BaseUrl is not configured.");
+            if (string.IsNullOrEmpty(BaseUrl))
+            {
+                // 2. Fallback to appsettings.json (for local dev)
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+                BaseUrl = configuration["BaseUrl"] ?? throw new Exception("BaseUrl is not configured.");
+            }
 
             // Build strongly-typed model
             PortfolioData = new PortfolioData
@@ -34,13 +40,13 @@ namespace PortfolioAutomationTest
                 BaseUrl = BaseUrl
             };
 
-            Console.WriteLine(PortfolioData.ToString());
+            Console.WriteLine($"Using BaseUrl: {PortfolioData.BaseUrl}");
 
             // Setup Playwright and Browser
             var playwright = await Playwright.CreateAsync();
             Browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = false
+                Headless = true 
             });
 
             var context = await Browser.NewContextAsync(new BrowserNewContextOptions
