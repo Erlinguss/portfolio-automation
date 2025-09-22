@@ -7,9 +7,8 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule:
-    - cron: "0 17 * * *" # daily at 17:00 UTC
+    - cron: "0 17 * * *"
 
-# allow workflow to push commits
 permissions:
   contents: write
 
@@ -46,15 +45,22 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
         continue-on-error: true   
 
-      - name: Convert TRX to JSON (Trx2Any with fallback)
+      - name: Convert TRX to JSON
         if: always()
         run: |
-          dotnet tool install --global Trx2Any
+          # install trx2junit
+          dotnet tool install --global dotnet-trx2junit
           export PATH="$PATH:/home/runner/.dotnet/tools"
 
           if [ -f ./TestResults/test-results.trx ]; then
-            echo "Converting TRX to JSON with Trx2Any..."
-            trx2any ./TestResults/test-results.trx ./TestResults/test-results.json --format json
+            echo "Converting TRX to JUnit XML..."
+            trx2junit ./TestResults/test-results.trx
+
+            echo "Converting JUnit XML to JSON..."
+            sudo apt-get update && sudo apt-get install -y nodejs npm
+            npm install -g xml2json-command
+
+            xml2json ./TestResults/test-results.xml > ./TestResults/test-results.json
           else
             echo "No TRX file found. Creating fallback JSON..."
             echo '{
@@ -88,11 +94,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           mkdir -p results
-          cp ./TestResults/test-results.json results/$(date +'%Y-%m-%d').json
+          cp ./TestResults/test-results.json results/$(date +'%Y-%m-%d')-${{ github.run_id }}.json
 
           git fetch origin
           git checkout results || git checkout -b results
 
           git add results/
-          git commit -m "Add test results for $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          git commit -m "Add test results for $(date +'%Y-%m-%d') run ${{ github.run_id }}" || echo "No changes to commit"
           git push origin results
