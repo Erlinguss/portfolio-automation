@@ -1,0 +1,74 @@
+{
+  "test_runs": [
+    {
+      "test_name": "TestBackToTop",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:19.7212598+00:00",
+      "end_time": "2025-09-22T21:42:21.9901829+00:00",
+      "duration": "00:00:02.2689240"
+    },
+    {
+      "test_name": "TestNavigationMenu",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:24.7345667+00:00",
+      "end_time": "2025-09-22T21:42:29.6936358+00:00",
+      "duration": "00:00:04.9590700"
+    },
+    {
+      "test_name": "TestCopyEmail",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:21.9905077+00:00",
+      "end_time": "2025-09-22T21:42:23.4362882+00:00",
+      "duration": "00:00:01.4457810"
+    },
+    {
+      "test_name": "TestContactFormFill",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:15.3006891+00:00",
+      "end_time": "2025-09-22T21:42:17.9091661+00:00",
+      "duration": "00:00:02.6084780"
+    },
+    {
+      "test_name": "TestResponsiveness",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:08.1630934+00:00",
+      "end_time": "2025-09-22T21:42:13.8020501+00:00",
+      "duration": "00:00:05.6390060"
+    },
+    {
+      "test_name": "TestGitHubFooterLink",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:23.4366027+00:00",
+      "end_time": "2025-09-22T21:42:24.7342620+00:00",
+      "duration": "00:00:01.2976589"
+    },
+    {
+      "test_name": "TestDownloadCV",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:17.9095548+00:00",
+      "end_time": "2025-09-22T21:42:19.7208809+00:00",
+      "duration": "00:00:01.8113270"
+    },
+    {
+      "test_name": "TestProjectCodeLink",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:29.6939360+00:00",
+      "end_time": "2025-09-22T21:42:31.6543437+00:00",
+      "duration": "00:00:01.9604080"
+    },
+    {
+      "test_name": "TestSocialLinks",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:31.6547795+00:00",
+      "end_time": "2025-09-22T21:42:33.4296103+00:00",
+      "duration": "00:00:01.7748320"
+    },
+    {
+      "test_name": "TestContactModal",
+      "outcome": "Passed",
+      "start_time": "2025-09-22T21:42:13.8052409+00:00",
+      "end_time": "2025-09-22T21:42:15.3003127+00:00",
+      "duration": "00:00:01.4950730"
+    }
+  ]
+}
