@@ -1,4 +1,4 @@
-name: Portfolio Automation Tests
+﻿name: Portfolio Automation Tests
 
 on:
   push:
@@ -43,30 +43,47 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
         continue-on-error: true   
 
-      - name: Convert TRX to JSON (trx2json)
+      - name: Convert TRX to JSON (Python inline)
         if: always()
         run: |
-          npm install -g trx2json
-          if [ -f ./TestResults/test-results.trx ]; then
-            trx2json ./TestResults/test-results.trx > ./TestResults/test-results.json
-          else
-            echo "No TRX file found. Creating fallback JSON..."
-            echo '{
-              "testRun": {
-                "name": "PortfolioAutomationTest",
-                "resultSummary": {
+          python - <<'EOF'
+          import xml.etree.ElementTree as ET
+          import json, os, sys
+
+          trx_file = "./TestResults/test-results.trx"
+          json_file = "./TestResults/test-results.json"
+
+          if not os.path.exists(trx_file):
+              print("No TRX file found. Creating fallback JSON...")
+              fallback = {
+                  "testRun": "PortfolioAutomationTest",
                   "outcome": "No TRX generated",
-                  "counters": {
-                    "total": 0,
-                    "executed": 0,
-                    "passed": 0,
-                    "failed": 0
-                  }
-                },
-                "results": []
+                  "results": []
               }
-            }' > ./TestResults/test-results.json
-          fi
+              with open(json_file, "w") as f:
+                  json.dump(fallback, f, indent=4)
+              sys.exit(0)
+
+          ns = {'ns': 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010'}
+          tree = ET.parse(trx_file)
+          root = tree.getroot()
+
+          result_dict = {"test_runs": []}
+          for unit_test_result in root.findall('.//ns:UnitTestResult', ns):
+              test_result = {
+                  "test_name": unit_test_result.get("testName"),
+                  "outcome": unit_test_result.get("outcome"),
+                  "start_time": unit_test_result.get("startTime"),
+                  "end_time": unit_test_result.get("endTime"),
+                  "duration": unit_test_result.get("duration")
+              }
+              result_dict["test_runs"].append(test_result)
+
+          with open(json_file, "w") as f:
+              json.dump(result_dict, f, indent=4)
+
+          print(f"Converted {trx_file} → {json_file}")
+          EOF
 
       - name: Upload test results (TRX + JSON)
         if: always()
