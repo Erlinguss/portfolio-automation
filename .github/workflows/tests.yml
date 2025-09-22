@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
@@ -45,40 +43,14 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
         continue-on-error: true   
 
-      - name: Convert TRX to JSON
+      - name: Convert TRX to JSON (test-reporter)
         if: always()
-        run: |
-          # install trx2junit
-          dotnet tool install --global dotnet-trx2junit
-          export PATH="$PATH:/home/runner/.dotnet/tools"
-
-          if [ -f ./TestResults/test-results.trx ]; then
-            echo "Converting TRX to JUnit XML..."
-            trx2junit ./TestResults/test-results.trx
-
-            echo "Converting JUnit XML to JSON..."
-            sudo apt-get update && sudo apt-get install -y nodejs npm
-            npm install -g xml2json-command
-
-            xml2json ./TestResults/test-results.xml > ./TestResults/test-results.json
-          else
-            echo "No TRX file found. Creating fallback JSON..."
-            echo '{
-              "testRun": {
-                "name": "PortfolioAutomationTest",
-                "resultSummary": {
-                  "outcome": "No TRX generated",
-                  "counters": {
-                    "total": 0,
-                    "executed": 0,
-                    "passed": 0,
-                    "failed": 0
-                  }
-                },
-                "results": []
-              }
-            }' > ./TestResults/test-results.json
-          fi
+        uses: dorny/test-reporter@v1
+        with:
+          name: Portfolio Tests
+          path: ./TestResults/test-results.trx
+          reporter: dotnet-trx
+          output: ./TestResults/test-results.json
 
       - name: Upload test results (TRX + JSON)
         if: always()
