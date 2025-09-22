@@ -7,7 +7,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule:
-    - cron: "0 17 * * *"
+    - cron: "0 17 * * *" # daily at 17:00 UTC
 
 permissions:
   contents: write
@@ -46,43 +46,29 @@ jobs:
       - name: Convert TRX to JSON (Python inline)
         if: always()
         run: |
-          python - <<'EOF'
+          python3 - <<EOF
           import xml.etree.ElementTree as ET
-          import json, os, sys
-
+          import json, os
           trx_file = "./TestResults/test-results.trx"
           json_file = "./TestResults/test-results.json"
-
-          if not os.path.exists(trx_file):
-              print("No TRX file found. Creating fallback JSON...")
-              fallback = {
-                  "testRun": "PortfolioAutomationTest",
-                  "outcome": "No TRX generated",
-                  "results": []
-              }
-              with open(json_file, "w") as f:
-                  json.dump(fallback, f, indent=4)
-              sys.exit(0)
-
           ns = {'ns': 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010'}
-          tree = ET.parse(trx_file)
-          root = tree.getroot()
-
-          result_dict = {"test_runs": []}
-          for unit_test_result in root.findall('.//ns:UnitTestResult', ns):
-              test_result = {
-                  "test_name": unit_test_result.get("testName"),
-                  "outcome": unit_test_result.get("outcome"),
-                  "start_time": unit_test_result.get("startTime"),
-                  "end_time": unit_test_result.get("endTime"),
-                  "duration": unit_test_result.get("duration")
-              }
-              result_dict["test_runs"].append(test_result)
-
+          results = {"test_runs": []}
+          if os.path.exists(trx_file):
+              tree = ET.parse(trx_file)
+              root = tree.getroot()
+              for unit_test_result in root.findall('.//ns:UnitTestResult', ns):
+                  results["test_runs"].append({
+                      "test_name": unit_test_result.get("testName"),
+                      "outcome": unit_test_result.get("outcome"),
+                      "start_time": unit_test_result.get("startTime"),
+                      "end_time": unit_test_result.get("endTime"),
+                      "duration": unit_test_result.get("duration")
+                  })
+          else:
+              results["error"] = "No TRX file found"
           with open(json_file, "w") as f:
-              json.dump(result_dict, f, indent=4)
-
-          print(f"Converted {trx_file} → {json_file}")
+              json.dump(results, f, indent=2)
+          print(f"Converted {trx_file} -> {json_file}")
           EOF
 
       - name: Upload test results (TRX + JSON)
@@ -98,12 +84,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          mkdir -p results
-          cp ./TestResults/test-results.json results/$(date +'%Y-%m-%d')-${{ github.run_id }}.json
+          mkdir -p results-data
+          cp ./TestResults/test-results.json results-data/$(date +'%Y-%m-%d')-${{ github.run_id }}.json
 
           git fetch origin
-          git checkout results || git checkout -b results
+          git checkout results || git checkout -b results origin/results
 
-          git add results/
+          git pull origin results --rebase || true
+
+          git add results-data/
           git commit -m "Add test results for $(date +'%Y-%m-%d') run ${{ github.run_id }}" || echo "No changes to commit"
           git push origin results
