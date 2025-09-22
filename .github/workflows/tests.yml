@@ -2,14 +2,16 @@ name: Portfolio Automation Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
   schedule:
-    - cron: "0 17 * * *" 
+    - cron: "0 17 * * *" # daily at 17:00 UTC
+
+# allow workflow to push commits
+permissions:
+  contents: write
 
 jobs:
   test:
@@ -18,6 +20,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
@@ -34,9 +38,10 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: dotnet test ./PortfolioAutomationTest/PortfolioAutomationTest.csproj \
-              --logger "trx;LogFileName=test-results.trx" \
-              --results-directory ./TestResults
+        run: |
+          dotnet test ./PortfolioAutomationTest/PortfolioAutomationTest.csproj \
+            --logger "trx;LogFileName=test-results.trx" \
+            --results-directory ./TestResults
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
         continue-on-error: true   
@@ -44,9 +49,16 @@ jobs:
       - name: Convert TRX to JSON
         if: always()
         run: |
-          dotnet tool install --global trx2json
+          dotnet tool install --global dotnet-reportgenerator-globaltool
           export PATH="$PATH:/home/runner/.dotnet/tools"
-          trx2json ./TestResults/test-results.trx > ./TestResults/test-results.json
+
+          # generate JSON summary from trx
+          reportgenerator -reports:./TestResults/test-results.trx \
+                          -targetdir:./TestResults/json \
+                          -reporttypes:Json
+
+          # rename output for consistency
+          cp ./TestResults/json/Summary.json ./TestResults/test-results.json
 
       - name: Upload test results (TRX + JSON)
         if: always()
@@ -58,19 +70,15 @@ jobs:
       - name: Commit JSON results to results branch
         if: always()
         run: |
-          # configure GitHub bot identity
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # create results folder + copy json with date filename
           mkdir -p results
           cp ./TestResults/test-results.json results/$(date +'%Y-%m-%d').json
 
-          # switch to results branch (create if missing)
           git fetch origin
           git checkout results || git checkout -b results
 
-          # move file into branch and commit
           git add results/
           git commit -m "Add test results for $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git push origin results
