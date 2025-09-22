@@ -46,19 +46,33 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
         continue-on-error: true   
 
-      - name: Convert TRX to JSON
+      - name: Convert TRX to JSON (Trx2Any with fallback)
         if: always()
         run: |
-          dotnet tool install --global dotnet-reportgenerator-globaltool
+          dotnet tool install --global Trx2Any
           export PATH="$PATH:/home/runner/.dotnet/tools"
 
-          # generate JSON summary from trx
-          reportgenerator -reports:./TestResults/test-results.trx \
-                          -targetdir:./TestResults/json \
-                          -reporttypes:Json
-
-          # rename output for consistency
-          cp ./TestResults/json/Summary.json ./TestResults/test-results.json
+          if [ -f ./TestResults/test-results.trx ]; then
+            echo "Converting TRX to JSON with Trx2Any..."
+            trx2any ./TestResults/test-results.trx ./TestResults/test-results.json --format json
+          else
+            echo "No TRX file found. Creating fallback JSON..."
+            echo '{
+              "testRun": {
+                "name": "PortfolioAutomationTest",
+                "resultSummary": {
+                  "outcome": "No TRX generated",
+                  "counters": {
+                    "total": 0,
+                    "executed": 0,
+                    "passed": 0,
+                    "failed": 0
+                  }
+                },
+                "results": []
+              }
+            }' > ./TestResults/test-results.json
+          fi
 
       - name: Upload test results (TRX + JSON)
         if: always()
