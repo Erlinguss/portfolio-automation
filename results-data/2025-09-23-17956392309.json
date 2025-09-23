@@ -1,0 +1,74 @@
+{
+  "test_runs": [
+    {
+      "test_name": "TestNavigationMenu",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:37.2088335+00:00",
+      "end_time": "2025-09-23T19:08:37.6252551+00:00",
+      "duration": "00:00:00.4164220"
+    },
+    {
+      "test_name": "TestContactFormFill",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:35.0701009+00:00",
+      "end_time": "2025-09-23T19:08:35.5298396+00:00",
+      "duration": "00:00:00.4597390"
+    },
+    {
+      "test_name": "TestCopyEmail",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:36.3983749+00:00",
+      "end_time": "2025-09-23T19:08:36.8379588+00:00",
+      "duration": "00:00:00.4395850"
+    },
+    {
+      "test_name": "TestSocialLinks",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:38.0236224+00:00",
+      "end_time": "2025-09-23T19:08:38.3626111+00:00",
+      "duration": "00:00:00.3389890"
+    },
+    {
+      "test_name": "TestContactModal",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:34.6155696+00:00",
+      "end_time": "2025-09-23T19:08:35.0697878+00:00",
+      "duration": "00:00:00.4542190"
+    },
+    {
+      "test_name": "TestDownloadCV",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:35.5300845+00:00",
+      "end_time": "2025-09-23T19:08:36.0221912+00:00",
+      "duration": "00:00:00.4921070"
+    },
+    {
+      "test_name": "TestResponsiveness",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:34.0685411+00:00",
+      "end_time": "2025-09-23T19:08:34.6112504+00:00",
+      "duration": "00:00:00.5427590"
+    },
+    {
+      "test_name": "TestProjectCodeLink",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:37.6255065+00:00",
+      "end_time": "2025-09-23T19:08:38.0233195+00:00",
+      "duration": "00:00:00.3978130"
+    },
+    {
+      "test_name": "TestGitHubFooterLink",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:36.8381911+00:00",
+      "end_time": "2025-09-23T19:08:37.2077315+00:00",
+      "duration": "00:00:00.3695410"
+    },
+    {
+      "test_name": "TestBackToTop",
+      "outcome": "Failed",
+      "start_time": "2025-09-23T19:08:36.0224903+00:00",
+      "end_time": "2025-09-23T19:08:36.3981204+00:00",
+      "duration": "00:00:00.3756310"
+    }
+  ]
+}
