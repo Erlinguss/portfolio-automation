@@ -1,0 +1,74 @@
+{
+  "test_runs": [
+    {
+      "test_name": "TestBackToTop",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:03.2805422+00:00",
+      "end_time": "2025-09-23T19:59:05.5300105+00:00",
+      "duration": "00:00:02.2494690"
+    },
+    {
+      "test_name": "TestContactFormFill",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:58:58.8150032+00:00",
+      "end_time": "2025-09-23T19:59:01.2660755+00:00",
+      "duration": "00:00:02.4510730"
+    },
+    {
+      "test_name": "TestResponsiveness",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:58:51.3327559+00:00",
+      "end_time": "2025-09-23T19:58:57.5046914+00:00",
+      "duration": "00:00:06.1720119"
+    },
+    {
+      "test_name": "TestDownloadCV",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:01.2664694+00:00",
+      "end_time": "2025-09-23T19:59:03.2801239+00:00",
+      "duration": "00:00:02.0136550"
+    },
+    {
+      "test_name": "TestSocialLinks",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:14.7570749+00:00",
+      "end_time": "2025-09-23T19:59:16.1861387+00:00",
+      "duration": "00:00:01.4290650"
+    },
+    {
+      "test_name": "TestProjectCodeLink",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:13.0330234+00:00",
+      "end_time": "2025-09-23T19:59:14.7553293+00:00",
+      "duration": "00:00:01.7223070"
+    },
+    {
+      "test_name": "TestCopyEmail",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:05.5304243+00:00",
+      "end_time": "2025-09-23T19:59:06.7749847+00:00",
+      "duration": "00:00:01.2445610"
+    },
+    {
+      "test_name": "TestNavigationMenu",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:08.2145950+00:00",
+      "end_time": "2025-09-23T19:59:13.0326628+00:00",
+      "duration": "00:00:04.8180690"
+    },
+    {
+      "test_name": "TestContactModal",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:58:57.5081878+00:00",
+      "end_time": "2025-09-23T19:58:58.8145483+00:00",
+      "duration": "00:00:01.3063610"
+    },
+    {
+      "test_name": "TestGitHubFooterLink",
+      "outcome": "Passed",
+      "start_time": "2025-09-23T19:59:06.7753296+00:00",
+      "end_time": "2025-09-23T19:59:08.2142517+00:00",
+      "duration": "00:00:01.4389220"
+    }
+  ]
+}
