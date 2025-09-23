@@ -31,9 +31,20 @@ jobs:
       - name: Build solution
         run: dotnet build ./PortfolioAutomation/PortfolioAutomation.sln --configuration Release --no-restore
 
-      # ✅ Correct Playwright install for CI
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      # Cache Playwright browsers
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/PortfolioAutomationTest.csproj') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      # Install Playwright for .NET (ensures browsers exist)
+      - name: Install Playwright for .NET
+        run: |
+          dotnet build ./PortfolioAutomationTest/PortfolioAutomationTest.csproj
+          pwsh ./PortfolioAutomationTest/bin/Debug/net8.0/playwright.ps1 install --with-deps
 
       - name: Run tests
         run: |
@@ -90,7 +101,6 @@ jobs:
 
           git fetch origin
           git checkout results || git checkout -b results origin/results
-
           git pull origin results --rebase || true
 
           git add results-data/
