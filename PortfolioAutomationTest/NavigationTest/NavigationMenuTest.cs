@@ -23,7 +23,8 @@ namespace PortfolioAutomationTest.NavigationTest
                 flow.Chain(new AboutAssertion(Repository));
                 flow.Chain(new CheckProjectsNavigation(Repository));
                 flow.Chain(new ProjectsAssertion(Repository));
-                flow.Chain(new CheckSkillsNavigation(Repository));
+                flow.Chain(new CheckCICDNavigation(Repository));
+                flow.Chain(new CICDAssertion(Repository));
 
                 await flow.Execute();
 
