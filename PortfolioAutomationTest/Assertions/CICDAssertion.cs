@@ -6,22 +6,23 @@ using static Microsoft.Playwright.Assertions;
 
 namespace PortfolioAutomationTest
 {
-    public class SkillsAssertion : BaseStep
+    public class CICDAssertion : BaseStep
     {
-        public SkillsAssertion(IRepository repository, IStep next = null)
+        public CICDAssertion(IRepository repository, IStep next = null)
             : base(repository, next) { }
 
         protected override async Task PerformExecute()
         {
-            Console.WriteLine("Asserting Skills Section...");
+            Console.WriteLine("Asserting CI/CD Section...");
 
             var page = Repository.Get<IPage>();
             await page.WaitForLoadStateAsync();
 
-            var skillsLocator = page.Locator("h2:has-text('Core Skills & Technologies')");
-            await Expect(skillsLocator).ToBeVisibleAsync();
+            // Look for the CI/CD Dashboard header
+            var cicdLocator = page.Locator("h1:has-text('CI/CD Dashboard')");
+            await Expect(cicdLocator).ToBeVisibleAsync();
 
-            Console.WriteLine("Skills section is visible.");
+            Console.WriteLine("CI/CD section is visible.");
         }
     }
 }
