@@ -1,0 +1,74 @@
+{
+  "test_runs": [
+    {
+      "test_name": "TestSocialLinks",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:42.3262113+00:00",
+      "end_time": "2025-10-03T17:11:43.9768188+00:00",
+      "duration": "00:00:01.6506080"
+    },
+    {
+      "test_name": "TestDownloadCV",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:28.6355728+00:00",
+      "end_time": "2025-10-03T17:11:30.4797289+00:00",
+      "duration": "00:00:01.8441570"
+    },
+    {
+      "test_name": "TestProjectCodeLink",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:40.5852301+00:00",
+      "end_time": "2025-10-03T17:11:42.3257831+00:00",
+      "duration": "00:00:01.7405540"
+    },
+    {
+      "test_name": "TestGitHubFooterLink",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:34.2478788+00:00",
+      "end_time": "2025-10-03T17:11:35.6849899+00:00",
+      "duration": "00:00:01.4371120"
+    },
+    {
+      "test_name": "TestContactFormFill",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:26.1378304+00:00",
+      "end_time": "2025-10-03T17:11:28.6352214+00:00",
+      "duration": "00:00:02.4973920"
+    },
+    {
+      "test_name": "TestCopyEmail",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:32.6457764+00:00",
+      "end_time": "2025-10-03T17:11:34.2475656+00:00",
+      "duration": "00:00:01.6017900"
+    },
+    {
+      "test_name": "TestNavigationMenu",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:35.6853023+00:00",
+      "end_time": "2025-10-03T17:11:40.5848369+00:00",
+      "duration": "00:00:04.8995350"
+    },
+    {
+      "test_name": "TestBackToTop",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:30.4800280+00:00",
+      "end_time": "2025-10-03T17:11:32.6454618+00:00",
+      "duration": "00:00:02.1654350"
+    },
+    {
+      "test_name": "TestContactModal",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:24.8664830+00:00",
+      "end_time": "2025-10-03T17:11:26.1373605+00:00",
+      "duration": "00:00:01.2708780"
+    },
+    {
+      "test_name": "TestResponsiveness",
+      "outcome": "Passed",
+      "start_time": "2025-10-03T17:11:18.0089877+00:00",
+      "end_time": "2025-10-03T17:11:24.8630205+00:00",
+      "duration": "00:00:06.8540840"
+    }
+  ]
+}
